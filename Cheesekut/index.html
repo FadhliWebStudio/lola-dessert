@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lola Dessert</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f7;
+padding-bottom:130px;
+color:#333;
+}
+
+/* HEADER */
+
+.header{
+background:white;
+padding:20px;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.shop-name{
+font-size:28px;
+font-weight:700;
+color:#ff4f81;
+}
+
+.shop-desc{
+font-size:14px;
+color:#777;
+margin-top:5px;
+}
+
+/* CATEGORY */
+
+.category{
+padding:20px 18px 5px;
+font-size:24px;
+font-weight:700;
+color:#ff4f81;
+}
+
+/* MENU CARD */
+
+.food-card{
+background:white;
+margin:15px;
+padding:15px;
+border-radius:28px;
+display:flex;
+gap:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.06);
+}
+
+.food-img{
+width:110px;
+height:110px;
+border-radius:22px;
+object-fit:cover;
+flex-shrink:0;
+}
+
+.food-content{
+flex:1;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:10px;
+}
+
+.food-title{
+font-size:19px;
+font-weight:700;
+line-height:1.2;
+}
+
+.price{
+font-size:18px;
+font-weight:700;
+color:#ff4f81;
+white-space:nowrap;
+}
+
+.rating{
+font-size:14px;
+color:#888;
+margin-top:8px;
+}
+
+.desc{
+font-size:15px;
+color:#666;
+margin-top:12px;
+line-height:1.5;
+}
+
+.qty{
+display:flex;
+justify-content:flex-end;
+align-items:center;
+gap:12px;
+margin-top:15px;
+}
+
+.qty button{
+width:42px;
+height:42px;
+border:none;
+border-radius:14px;
+background:#ff4f81;
+color:white;
+font-size:24px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.qty span{
+font-size:24px;
+font-weight:700;
+min-width:20px;
+text-align:center;
+}
+
+/* ORDER BOX */
+
+.order-box{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:28px;
+box-shadow:0 5px 15px rgba(0,0,0,0.06);
+}
+
+.order-box h2{
+font-size:24px;
+color:#ff4f81;
+margin-bottom:15px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:14px;
+border-radius:16px;
+border:1px solid #ddd;
+margin-top:10px;
+font-size:15px;
+}
+
+textarea{
+height:90px;
+resize:none;
+}
+
+.btn{
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:18px;
+text-align:center;
+font-weight:700;
+margin-top:15px;
+cursor:pointer;
+}
+
+.note{
+font-size:13px;
+color:#666;
+margin-top:10px;
+text-align:center;
+}
+
+/* QR */
+
+.qr-img{
+width:100%;
+max-width:320px;
+display:block;
+margin:20px auto;
+border-radius:25px;
+}
+
+/* CART */
+
+.cart{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+padding:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 -5px 20px rgba(0,0,0,0.08);
+z-index:999;
+}
+
+.total{
+font-size:22px;
+font-weight:700;
+}
+
+.checkout{
+background:#ff4f81;
+color:white;
+padding:16px 30px;
+border-radius:18px;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,0.5);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup-box{
+background:white;
+padding:30px;
+border-radius:30px;
+width:90%;
+max-width:350px;
+text-align:center;
+animation:pop 0.3s ease;
+}
+
+@keyframes pop{
+0%{
+transform:scale(0.7);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.popup-box h2{
+color:#ff4f81;
+font-size:28px;
+margin-bottom:10px;
+}
+
+.popup-box p{
+font-size:15px;
+color:#666;
+line-height:1.6;
+margin-top:10px;
+}
+
+.popup-btn{
+background:#ff4f81;
+color:white;
+padding:14px;
+border-radius:18px;
+margin-top:20px;
+font-weight:700;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="shop-name">
+🍰 Lola Dessert
+</div>
+
+<div class="shop-desc">
+Mini Cheesekut • Dadih • BurnCheese Cake ✨
+</div>
+
+</div>
+
+<!-- MINI CHEESEKUT -->
+
+<div class="category">🧁 Mini Cheesekut</div>
+
+<div class="food-card">
+<img src="nestum.jpg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Nestum Cheesekut</div>
+<div class="price">RM1.50</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Creamy, manis & crunchy nestum 😍</div>
+<div class="qty">
+<button onclick="update('nestum',-1)">-</button>
+<span id="nestum">0</span>
+<button onclick="update('nestum',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="milo.jpg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Milo Cheesekut</div>
+<div class="price">RM1.50</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Rasa coklat milo yang padu 🔥</div>
+<div class="qty">
+<button onclick="update('milo',-1)">-</button>
+<span id="milo">0</span>
+<button onclick="update('milo',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="oreo.jpg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Oreo Crumble</div>
+<div class="price">RM1.50</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Gabungan oreo & cream yang sedap 😋</div>
+<div class="qty">
+<button onclick="update('oreo',-1)">-</button>
+<span id="oreo">0</span>
+<button onclick="update('oreo',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="biscoff.jpg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Biscoff Cheesekut</div>
+<div class="price">RM1.50</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Premium lotus biscoff viral 🔥</div>
+<div class="qty">
+<button onclick="update('biscoff',-1)">-</button>
+<span id="biscoff">0</span>
+<button onclick="update('biscoff',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="redvelvet.jpg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Cheesekut Red Velvet</div>
+<div class="price">RM1.50</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Manis creamy red velvet premium ❤️</div>
+<div class="qty">
+<button onclick="update('redvelvet',-1)">-</button>
+<span id="redvelvet">0</span>
+<button onclick="update('redvelvet',1)">+</button>
+</div>
+</div>
+</div>
+
+<!-- DADIH -->
+
+<div class="category">🥤 Dadih Sedut</div>
+
+<div class="food-card">
+<img src="dadihstrawberry.jpeg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Dadih Strawberry</div>
+<div class="price">RM1</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Fresh & sejuk rasa strawberry 🍓</div>
+<div class="qty">
+<button onclick="update('strawberry',-1)">-</button>
+<span id="strawberry">0</span>
+<button onclick="update('strawberry',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="dadihjagung.jpeg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Dadih Jagung</div>
+<div class="price">RM1</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Lemak manis jagung memang sedap 🌽</div>
+<div class="qty">
+<button onclick="update('jagung',-1)">-</button>
+<span id="jagung">0</span>
+<button onclick="update('jagung',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="dadihcoklat.jpeg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Dadih Coklat</div>
+<div class="price">RM1</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Pekat coklat & creamy 🍫</div>
+<div class="qty">
+<button onclick="update('coklat',-1)">-</button>
+<span id="coklat">0</span>
+<button onclick="update('coklat',1)">+</button>
+</div>
+</div>
+</div>
+
+<div class="food-card">
+<img src="dadihhoneywdew.jpeg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Dadih Honeydew</div>
+<div class="price">RM1</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Fresh, creamy & sejuk rasa honeydew 🍈</div>
+<div class="qty">
+<button onclick="update('honeydew',-1)">-</button>
+<span id="honeydew">0</span>
+<button onclick="update('honeydew',1)">+</button>
+</div>
+</div>
+</div>
+
+<!-- BURNCHEESE -->
+
+<div class="category">🧀 BurnCheese Cake</div>
+
+<div class="food-card">
+<img src="burncheese.jpeg" class="food-img">
+<div class="food-content">
+<div class="top">
+<div class="food-title">Mini BurnCheese Cake</div>
+<div class="price">RM3</div>
+</div>
+<div class="rating">⭐ 5.0</div>
+<div class="desc">Lembut, creamy & premium burnt cheese 🔥</div>
+<div class="qty">
+<button onclick="update('burncheese',-1)">-</button>
+<span id="burncheese">0</span>
+<button onclick="update('burncheese',1)">+</button>
+</div>
+</div>
+</div>
+
+<!-- MAKLUMAT ORDER -->
+
+<div class="order-box">
+
+<h2>📋 Maklumat Order</h2>
+
+<input type="text" id="nama" placeholder="Nama anda">
+
+<select id="delivery" onchange="toggleCODSection()">
+<option value="">Pilih Kaedah Penghantaran</option>
+<option value="Pickup">Pickup</option>
+<option value="COD">COD</option>
+</select>
+
+<div id="codSection" style="display:none;">
+
+<select id="area" onchange="kira()">
+<option value="">Pilih Area COD</option>
+<option value="Selindung Daun">Selindung Daun (FREE)</option>
+<option value="Luar">Luar Area (+RM3)</option>
+</select>
+
+<label style="margin-top:15px;display:block;font-weight:600;color:#ff4f81;">
+📅 Tarikh Penghantaran
+</label>
+
+<input type="date" id="tarikh">
+
+<textarea id="alamat" placeholder="Alamat penghantaran"></textarea>
+
+<div class="btn" onclick="getLocation()">
+📍 Ambil Lokasi GPS
+</div>
+
+<p class="note" id="lokasiText"></p>
+
+</div>
+
+</div>
+
+<!-- PEMBAYARAN -->
+
+<div class="order-box">
+
+<h2>💳 Kaedah Pembayaran</h2>
+
+<select id="payment" onchange="toggleQR()">
+<option value="">Pilih Kaedah Pembayaran</option>
+<option value="Cash">Cash</option>
+<option value="QR">QR Payment</option>
+</select>
+
+<div id="qrSection" style="display:none;">
+
+<p class="note">
+Sila scan QR di bawah untuk pembayaran
+</p>
+
+<img src="qr.jpg" class="qr-img">
+
+<p style="text-align:center;font-weight:600;margin-top:10px;">
+Lina Haneen Binti Ahmad Tajuddin
+</p>
+
+</div>
+
+</div>
+
+<!-- CART -->
+
+<div class="cart">
+
+<div class="total" id="total">
+RM0
+</div>
+
+<div class="checkout" onclick="checkout()">
+Checkout
+</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h2>🎉 Terima Kasih</h2>
+
+<p>
+Order anda berjaya dibuat 💖
+<br><br>
+Tekan butang di bawah untuk terus ke WhatsApp 😊
+</p>
+
+<div class="popup-btn" onclick="sendWhatsapp()">
+Terus ke WhatsApp
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let data={
+nestum:0,
+milo:0,
+oreo:0,
+biscoff:0,
+redvelvet:0,
+strawberry:0,
+jagung:0,
+coklat:0,
+honeydew:0,
+burncheese:0
+};
+
+function update(item,val){
+
+data[item]+=val;
+
+if(data[item]<0){
+data[item]=0;
+}
+
+document.getElementById(item).innerText=data[item];
+
+kira();
+
+}
+
+function kira(){
+
+let total=0;
+
+total+=(data.nestum*1.5);
+total+=(data.milo*1.5);
+total+=(data.oreo*1.5);
+total+=(data.biscoff*1.5);
+total+=(data.redvelvet*1.5);
+
+total+=data.strawberry;
+total+=data.jagung;
+total+=data.coklat;
+total+=data.honeydew;
+
+total+=data.burncheese*3;
+
+let delivery=document.getElementById("delivery").value;
+let area=document.getElementById("area").value;
+
+if(delivery==="COD" && area==="Luar"){
+total+=3;
+}
+
+document.getElementById("total").innerText="RM"+total.toFixed(2);
+
+}
+
+function toggleCODSection(){
+
+let delivery=document.getElementById("delivery").value;
+
+document.getElementById("codSection").style.display=
+(delivery==="COD") ? "block" : "none";
+
+kira();
+
+}
+
+function toggleQR(){
+
+let payment=document.getElementById("payment").value;
+
+document.getElementById("qrSection").style.display=
+(payment==="QR") ? "block" : "none";
+
+}
+
+function getLocation(){
+
+navigator.geolocation.getCurrentPosition(pos=>{
+
+let lat=pos.coords.latitude;
+let lon=pos.coords.longitude;
+
+let lokasi=`https://maps.google.com/?q=${lat},${lon}`;
+
+document.getElementById("lokasiText").innerText=
+"Lokasi berjaya diambil ✔️";
+
+document.getElementById("lokasiText").dataset.link=lokasi;
+
+});
+
+}
+
+function checkout(){
+
+document.getElementById("popup").style.display="flex";
+
+}
+
+function sendWhatsapp(){
+
+let nama=document.getElementById("nama").value;
+let delivery=document.getElementById("delivery").value;
+let area=document.getElementById("area").value;
+let tarikh=document.getElementById("tarikh").value;
+let alamat=document.getElementById("alamat").value;
+let payment=document.getElementById("payment").value;
+
+let lokasi=document.getElementById("lokasiText").dataset.link || "";
+
+let total=0;
+
+let cheesekut="";
+let dadih="";
+let burncheese="";
+
+let msg=`🧾 *ORDER LOLA DESSERT*\n\n`;
+
+const cheesekutItems={
+"nestum":"Nestum Cheesekut",
+"milo":"Milo Cheesekut",
+"oreo":"Oreo Crumble",
+"biscoff":"Biscoff Cheesekut",
+"redvelvet":"Cheesekut Red Velvet"
+};
+
+for(let item in cheesekutItems){
+
+if(data[item]>0){
+
+let subtotal=data[item]*1.5;
+
+total+=subtotal;
+
+cheesekut+=`• ${cheesekutItems[item]} x ${data[item]} = RM${subtotal.toFixed(2)}\n`;
+
+}
+
+}
+
+const dadihItems=[
+"strawberry",
+"jagung",
+"coklat",
+"honeydew"
+];
+
+dadihItems.forEach(item=>{
+
+if(data[item]>0){
+
+let subtotal=data[item];
+
+total+=subtotal;
+
+dadih+=`• ${item.toUpperCase()} x ${data[item]} = RM${subtotal}\n`;
+
+}
+
+});
+
+if(data.burncheese>0){
+
+let subtotal=data.burncheese*3;
+
+total+=subtotal;
+
+burncheese+=`• MINI BURNCHEESE CAKE x ${data.burncheese} = RM${subtotal}\n`;
+
+}
+
+if(cheesekut!=""){
+
+msg+=`🧁 *MINI CHEESEKUT*\n`;
+msg+=`${cheesekut}\n`;
+
+}
+
+if(dadih!=""){
+
+msg+=`🥤 *DADIH SEDUT*\n`;
+msg+=`${dadih}\n`;
+
+}
+
+if(burncheese!=""){
+
+msg+=`🧀 *BURNCHEESE CAKE*\n`;
+msg+=`${burncheese}\n`;
+
+}
+
+msg+=`
+👤 Nama: ${nama}
+
+🚚 Kaedah Penghantaran: ${delivery}
+`;
+
+if(delivery==="COD"){
+
+msg+=`
+📍 Area COD: ${area}
+📅 Tarikh Penghantaran: ${tarikh}
+
+🏠 Alamat:
+${alamat}
+
+📍 Lokasi GPS:
+${lokasi}
+`;
+
+}
+
+msg+=`
+
+💳 Kaedah Pembayaran: ${payment}
+
+💵 *Jumlah Keseluruhan: RM${total.toFixed(2)}*
+`;
+
+window.open(
+"https://wa.me/60104545204?text="+encodeURIComponent(msg)
+);
+
+document.getElementById("popup").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
